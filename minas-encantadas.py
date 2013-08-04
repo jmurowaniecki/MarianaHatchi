@@ -54,7 +54,9 @@ class MinasEncantadas:
 
 mina = MinasEncantadas(10, 10, -5, 5)
 mina.exibe()
-mina.processa(4)
+
+for proporcao in xrange(2, 9):
+	mina.processa(proporcao)
 
 for melhor in mina.busca:
-	print melhor.valor
+	print "O melhor valor para matrizes de %d foi %d nas coordenadas x, y (%d, %d)." % (melhor.proporcao, melhor.valor, melhor.x, melhor.y)
