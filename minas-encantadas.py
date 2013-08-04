@@ -9,6 +9,7 @@ class Posicao:
 		self.valor = valor
 		self.proporcao = proporcao
 
+
 class MinasEncantadas:
 	terreno = busca = []
 	dimensoes = []
@@ -48,7 +49,7 @@ class MinasEncantadas:
 				mstr += "%d\t" % self.terreno[x][y]
 				soma += self.terreno[x][y]
 			mstr += "\n"
-		self.busca.append([])
+		self.busca.append(Posicao(x, y, proporcao, soma))
 		print '----------------------------------------------------'
 		print mstr
 		print '-------------------------------------------- %d' % soma
@@ -57,3 +58,6 @@ class MinasEncantadas:
 mina = MinasEncantadas(10, 10, -5, 5)
 mina.exibe()
 mina.processa()
+
+for i in xrange(5):
+	print mina.busca[i].valor
