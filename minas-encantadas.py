@@ -49,12 +49,18 @@ class MinasEncantadas:
 		return soma
 
 
-mina = MinasEncantadas(10, 10, -5, 5)
+mina = MinasEncantadas(10, 10, -50, 50)
 mina.exibe()
 
 for px in xrange(2, 9):
 	for py in xrange(2, 9):
 		mina.processa([px, py])
 
+ideal = Posicao(0, 0, [0, 0], 0)
+
 for melhor in mina.busca:
+	if melhor.valor > ideal.valor:
+		ideal = melhor
 	print "O melhor valor para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (melhor.proporcao[0], melhor.proporcao[1], melhor.valor, melhor.x, melhor.y)
+
+print "O valor ideal para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (ideal.proporcao[0], ideal.proporcao[1], ideal.valor, ideal.x, ideal.y)
