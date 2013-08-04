@@ -11,36 +11,23 @@ class MinasEncantadas:
 
 	def exibe(self):
 		for x in self.terreno:
-
 			mstr = ""
-
 			for y in x:
 				mstr += "%d\t" % y
-
 			print mstr
 
 
 	def processa(self):
 		tam_x = tam_y = 3
-
 		mstr = ""
-
 		x = 0
-
 		while x + tam_x < self.dimensoes[0]:
-
 			y = 0
-
 			while y + tam_y < self.dimensoes[1]:
-
 				self.soma([x, y], [x + tam_x, y + tam_y])
-
 				y += 1
-
 			mstr += "\n"
-
 			x += 1
-
 		print mstr
 
 
