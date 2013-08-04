@@ -18,30 +18,31 @@ class MinasEncantadas:
 
 
 	def processa(self):
-		tam_x = tam_y = 3
+		proporcao = 3
 		mstr = ""
 		x = 0
-		while x + tam_x < self.dimensoes[0]:
+		while x + proporcao < self.dimensoes[0]:
 			y = 0
-			while y + tam_y < self.dimensoes[1]:
-				self.soma([x, y], [x + tam_x, y + tam_y])
+			while y + proporcao < self.dimensoes[1]:
+				self.soma(x, y, proporcao)
 				y += 1
 			mstr += "\n"
 			x += 1
 		print mstr
 
 
-	def soma(self, de, ate):
+	def soma(self, ix, iy, proporcao):
 		mstr = ""
 		soma = 0
-		for x in range(de[0], ate[0]):
-			for y in range(de[1], ate[1]):
+		for x in range(ix, ix + proporcao):
+			for y in range(iy, iy + proporcao):
 				mstr += "%d\t" % self.terreno[x][y]
 				soma += self.terreno[x][y]
 			mstr += "\n"
 		print '----------------------------------------------------'
 		print mstr
 		print '-------------------------------------------- %d' % soma
+
 
 mina = MinasEncantadas(10, 10, -5, 5)
 mina.exibe()
