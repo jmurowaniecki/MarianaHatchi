@@ -28,10 +28,13 @@ class MinasEncantadas:
 
 	def processa(self, proporcao):
 		maior = elemento = 0
-		if type(proporcao) == 'int':
+		if type(proporcao) == int:
 			px, py = proporcao, proporcao
-		else:
+		elif type(proporcao) == list:
 			px, py = proporcao[0], proporcao[1]
+		else:
+			print "o tipo de dado recebido por processa deve ser [lista] ou inteiro"
+			return False
 		for x in xrange(0, self.dimensoes[0] - px + 1):
 			for y in xrange(0, self.dimensoes[1] - py + 1):
 				valor = self.soma(x, y, proporcao)
