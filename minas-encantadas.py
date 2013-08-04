@@ -1,5 +1,14 @@
 import random
 
+class Posicao:
+	x = y = proporcao = valor = 0
+
+	def __init__(self, x, y, proporcao, valor):
+		self.x = x
+		self.y = y
+		self.valor = valor
+		self.proporcao = proporcao
+
 class MinasEncantadas:
 	terreno = busca = []
 	dimensoes = []
@@ -39,6 +48,7 @@ class MinasEncantadas:
 				mstr += "%d\t" % self.terreno[x][y]
 				soma += self.terreno[x][y]
 			mstr += "\n"
+		self.busca.append([])
 		print '----------------------------------------------------'
 		print mstr
 		print '-------------------------------------------- %d' % soma
