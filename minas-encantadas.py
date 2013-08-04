@@ -27,36 +27,34 @@ class MinasEncantadas:
 
 
 	def processa(self, proporcao):
-		mstr = ""
 		maior = elemento = 0
-		for x in xrange(0, self.dimensoes[0] - proporcao + 1):
-			for y in xrange(0, self.dimensoes[1] - proporcao + 1):
+		if type(proporcao) == 'int':
+			px, py = proporcao, proporcao
+		else:
+			px, py = proporcao[0], proporcao[1]
+		for x in xrange(0, self.dimensoes[0] - px + 1):
+			for y in xrange(0, self.dimensoes[1] - py + 1):
 				valor = self.soma(x, y, proporcao)
 				if valor > maior:
 					maior = valor
-					elemento = Posicao(x, y, proporcao, valor)
-				print ": %d ---\n\n" % valor
+					elemento = Posicao(x, y, [px, py], valor)
 		self.busca.append(elemento)
-		print mstr
 
 
 	def soma(self, ix, iy, proporcao):
-		mstr = ""
 		soma = 0
-		for x in range(ix, ix + proporcao):
-			for y in range(iy, iy + proporcao):
-				mstr += "%d\t" % self.terreno[x][y]
+		for x in range(ix, ix + proporcao[0]):
+			for y in range(iy, iy + proporcao[1]):
 				soma += self.terreno[x][y]
-			mstr += "\n"
-		print mstr
 		return soma
 
 
 mina = MinasEncantadas(10, 10, -5, 5)
 mina.exibe()
 
-for proporcao in xrange(2, 9):
-	mina.processa(proporcao)
+for px in xrange(2, 9):
+	for py in xrange(2, 9):
+		mina.processa([px, py])
 
 for melhor in mina.busca:
-	print "O melhor valor para matrizes de %d foi %d nas coordenadas x, y (%d, %d)." % (melhor.proporcao, melhor.valor, melhor.x, melhor.y)
+	print "O melhor valor para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (melhor.proporcao[0], melhor.proporcao[1], melhor.valor, melhor.x, melhor.y)
