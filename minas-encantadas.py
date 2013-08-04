@@ -11,8 +11,7 @@ class Posicao:
 
 
 class MinasEncantadas:
-	terreno = busca = []
-	dimensoes = []
+	terreno = busca = dimensoes = []
 
 	def __init__(self, altura, largura, valor_minimo, valor_maximo):
 		self.dimensoes = [altura, largura]
@@ -27,17 +26,17 @@ class MinasEncantadas:
 			print mstr
 
 
-	def processa(self):
-		proporcao = 3
+	def processa(self, proporcao):
 		mstr = ""
-		x = 0
-		while x + proporcao < self.dimensoes[0]:
-			y = 0
-			while y + proporcao < self.dimensoes[1]:
-				self.soma(x, y, proporcao)
-				y += 1
-			mstr += "\n"
-			x += 1
+		maior = elemento = 0
+		for x in xrange(0, self.dimensoes[0] - proporcao + 1):
+			for y in xrange(0, self.dimensoes[1] - proporcao + 1):
+				valor = self.soma(x, y, proporcao)
+				if valor > maior:
+					maior = valor
+					elemento = Posicao(x, y, proporcao, valor)
+				print ": %d ---\n\n" % valor
+		self.busca.append(elemento)
 		print mstr
 
 
@@ -49,15 +48,13 @@ class MinasEncantadas:
 				mstr += "%d\t" % self.terreno[x][y]
 				soma += self.terreno[x][y]
 			mstr += "\n"
-		self.busca.append(Posicao(x, y, proporcao, soma))
-		print '----------------------------------------------------'
 		print mstr
-		print '-------------------------------------------- %d' % soma
+		return soma
 
 
 mina = MinasEncantadas(10, 10, -5, 5)
 mina.exibe()
-mina.processa()
+mina.processa(4)
 
-for i in xrange(5):
-	print mina.busca[i].valor
+for melhor in mina.busca:
+	print melhor.valor
