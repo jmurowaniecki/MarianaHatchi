@@ -1,7 +1,7 @@
 import random
 
 class Posicao:
-	x = y = proporcao = valor = 0
+	x, y, proporcao, valor = 0, 0, 0, 0
 
 	def __init__(self, x, y, proporcao, valor):
 		self.x = x
