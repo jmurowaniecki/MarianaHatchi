@@ -54,7 +54,11 @@ class MinasEncantadas:
 
 
 class Teste:
+	profiler = False
+
 	def __init__(self, x, y, vmin, vmax):
+		self.profiler = [x, y, vmin, vmax]
+
 		mina = MinasEncantadas(x, y, vmin, vmax)
 		mina.exibe()
 
