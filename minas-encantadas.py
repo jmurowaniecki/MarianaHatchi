@@ -22,7 +22,7 @@ class MinasEncantadas:
 		for x in self.terreno:
 			mstr = ""
 			for y in x:
-				mstr += "%d\t" % y 
+				mstr += "%d\t" % y
 			print mstr
 
 
