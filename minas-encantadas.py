@@ -28,17 +28,21 @@ class MinasEncantadas:
 
 	def processa(self, proporcao):
 		maior = elemento = 0
-		if type(proporcao) == 'int':
+		if type(proporcao) == int:
 			px, py = proporcao, proporcao
-		else:
+		elif type(proporcao) == list:
 			px, py = proporcao[0], proporcao[1]
+		else:
+			print "o tipo de dado recebido por processa deve ser [lista] ou inteiro"
+			return False
 		for x in xrange(0, self.dimensoes[0] - px + 1):
 			for y in xrange(0, self.dimensoes[1] - py + 1):
 				valor = self.soma(x, y, proporcao)
 				if valor > maior:
 					maior = valor
 					elemento = Posicao(x, y, [px, py], valor)
-		self.busca.append(elemento)
+		if type(elemento) != int:
+			self.busca.append(elemento)
 
 
 	def soma(self, ix, iy, proporcao):
@@ -49,18 +53,30 @@ class MinasEncantadas:
 		return soma
 
 
-mina = MinasEncantadas(10, 10, -50, 50)
-mina.exibe()
+class Teste:
+	profiler = False
 
-for px in xrange(2, 9):
-	for py in xrange(2, 9):
-		mina.processa([px, py])
+	def __init__(self, x, y, vmin, vmax):
+		self.profiler = [x, y, vmin, vmax]
 
-ideal = Posicao(0, 0, [0, 0], 0)
+		mina = MinasEncantadas(x, y, vmin, vmax)
+		mina.exibe()
 
-for melhor in mina.busca:
-	if melhor.valor > ideal.valor:
-		ideal = melhor
-	print "O melhor valor para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (melhor.proporcao[0], melhor.proporcao[1], melhor.valor, melhor.x, melhor.y)
+		for px in xrange(2, mina.dimensoes[0] / 2):
+			for py in xrange(2, mina.dimensoes[1] / 2):
+				mina.processa([px, py])
 
-print "O valor ideal para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (ideal.proporcao[0], ideal.proporcao[1], ideal.valor, ideal.x, ideal.y)
+		ideal = Posicao(0, 0, [0, 0], 0)
+
+		for melhor in mina.busca:
+			if type(melhor) == int:
+				print "melhor is integer %d" % melhor
+			if type(ideal.valor) != int:
+				print "ideal valor is not integer %d" % melhor.valor
+			if melhor.valor > ideal.valor:
+				ideal = melhor
+			print "O melhor valor para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (melhor.proporcao[0], melhor.proporcao[1], melhor.valor, melhor.x, melhor.y)
+
+		print "O valor ideal para matrizes de %dx%d foi %d nas coordenadas x, y (%d, %d)." % (ideal.proporcao[0], ideal.proporcao[1], ideal.valor, ideal.x, ideal.y)
+
+Teste(30, 30, -50, 50)
